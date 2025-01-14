@@ -112,8 +112,8 @@ const Home = () => {
                     {skills.map((skill, index) => (
                       <motion.div
                         key={index}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                         className="skill-card group relative p-6 sm:p-8 bg-gray-50 shadow-xl rounded-xl hover:shadow-2xl transition duration-300 hover:bg-red-50"
                       >
