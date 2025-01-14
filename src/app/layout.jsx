@@ -5,7 +5,9 @@ import Footer from "@/components/Footer";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <link rel="shortcut icon" href="/programmer.png" type="image/x-icon" />
+      <head>
+        <link rel="icon" href="/favicon-32x32.png" type="image/png" />
+      </head>
       <body>
         <Navbar />
         <main className="min-h-screen">{children}</main>

@@ -1,20 +1,34 @@
 "use client";
 import Image from "next/image";
-
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-// I heard from Djacer and sir that this package is popular and better than alert,
-// so I'm using it for showing notifications. However, I didn't know how to style it yet.
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const Contact = () => {
+  const router = useRouter();
+
   const handleSend = (e) => {
     e.preventDefault();
-    toast.success("Thank you for reaching out! I'll contact you soon.");
+
+    // Show a styled alert
+    Swal.fire({
+      title: "Message Sent!",
+      text: "Thank you for reaching out! I'll contact you soon.",
+      icon: "success",
+      confirmButtonColor: "#dc2626", // Red-600
+      confirmButtonText: "OK",
+      customClass: {
+        popup: "bg-gray-100 text-gray-800",
+        title: "text-red-600 font-bold text-2xl",
+        confirmButton: "bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300",
+      },
+    }).then(() => {
+      // Redirect to the homepage after the alert is closed
+      router.push("/");
+    });
   };
 
   return (
-    <div className="bg-gray-100 py-16">
+    <div className="bg-gray-100 min-h-screen py-16">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <Image
@@ -22,7 +36,7 @@ const Contact = () => {
             alt="Yahia Djouadi Logo"
             width={150}
             height={150}
-            className="mx-auto mb-4"
+            className="mx-auto mb-4 animate-bounce"
           />
           <h1 className="text-5xl font-bold text-red-600 mb-4">Contact Me</h1>
           <p className="text-lg text-gray-700">
@@ -30,7 +44,7 @@ const Contact = () => {
             chat. Feel free to reach out!
           </p>
         </div>
-        <div className="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <div className="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105">
           <form onSubmit={handleSend}>
             <div className="mb-6">
               <label
@@ -42,22 +56,9 @@ const Contact = () => {
               <input
                 type="text"
                 id="name"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 transition-all duration-300"
                 placeholder="Your Name"
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="email"
-                className="block text-gray-800 font-semibold mb-2"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
-                placeholder="Your Email"
+                required
               />
             </div>
             <div className="mb-6">
@@ -70,8 +71,9 @@ const Contact = () => {
               <textarea
                 id="message"
                 rows="4"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 transition-all duration-300"
                 placeholder="Your Message"
+                required
               />
             </div>
             <button
@@ -83,8 +85,6 @@ const Contact = () => {
           </form>
         </div>
       </div>
-
-      <ToastContainer />
     </div>
   );
 };
